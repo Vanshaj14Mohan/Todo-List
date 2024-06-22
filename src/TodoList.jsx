@@ -6,7 +6,7 @@ function TodoList(){
     let [newTodo, SetNewTodo] = useState(""); //for tracking new tasks
 
     let addNewTask = ()=>{
-        setTodos((prevTodos)=>{
+        setTodos((prevTodos)=>{ //using callback
             return [...prevTodos, { task: newTodo, id: uuidv4()}];
         });
         SetNewTodo("");
@@ -19,6 +19,16 @@ function TodoList(){
     let deleteTodo = (id) =>{ //will take an id and delete it 
         setTodos((prevTodos) =>todos.filter((prevTodos) => prevTodos.id != id)); //using filter method
     }
+
+   let upperCaseAll =() =>{
+    setTodos( (prevTodos) => prevTodos.map((todo) =>{
+        return {
+            ...todo,
+            task: todo.task.toUpperCase(),
+        }
+    })
+    );
+   };
 
     return(
         <div>
@@ -40,6 +50,9 @@ function TodoList(){
                     ))
                 }
             </ul>
+            <br></br>
+
+            <button onClick={upperCaseAll}>UpperCase All</button>
         </div>
     );
 }
